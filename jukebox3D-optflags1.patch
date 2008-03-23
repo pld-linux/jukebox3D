@@ -1,0 +1,45 @@
+--- jukebox3D/Makefile~	2007-11-10 19:44:09.000000000 +0200
++++ jukebox3D/Makefile	2008-03-23 16:58:10.404480998 +0200
+@@ -8,8 +8,10 @@
+ ##               (c) Copyright 2006-2007 Sylvain Pasquet                    ##
+ ##############################################################################
+ ##options de compilation
++CC=gcc
++OPTFLAGS=-O2
+ ##-pedantic flag throw error from gtk
+-CFLAGS=-Wall -std=c99 -O2 -g `sdl-config --cflags` `pkg-config --cflags gtk+-2.0 gtkglext-1.0 libglade-2.0` 
++CFLAGS=-Wall -std=c99 $(OPTFLAGS) -g `sdl-config --cflags` `pkg-config --cflags gtk+-2.0 gtkglext-1.0 libglade-2.0` 
+ ##prefix
+ PREFIX=/usr
+ ##Link
+@@ -17,7 +19,7 @@
+ LDFLAGSDEVIL=-export-dynamic -lSDL_image  -lSDL_ttf -lIL -lILUT -lGL `pkg-config --cflags --libs libglade-2.0 gtk+-2.0 gtkglext-1.0` `sdl-config --libs`
+ ##regle generique
+ %.o : %.c
+-	gcc ${CFLAGS} -Wall -c -o $*.o $*.c
++	$(CC) ${CFLAGS} -Wall -c -o $*.o $*.c
+ 
+ #liste des objets
+ OBJETS=src/LibFile.o src/LibCover.o src/LibOgl.o src/LibImg.o src/LibOptions.o src/LibStr.o src/main.o src/interface_main.o src/interface_ogl.o src/interface_options.o src/model.o src/timer.o src/callbacks.o src/managecfg.o
+@@ -41,11 +43,11 @@
+ objets: ${OBJETS}
+ 
+ exe:
+-	gcc -o ${EXE} ${OBJETS} ${LDFLAGS}
++	$(CC) -o ${EXE} ${OBJETS} ${LDFLAGS}
+ 
+ 
+ exedebug:
+-	gcc -DDEBUG -o  ${EXE} ${OBJETS} ${LDFLAGS}
++	$(CC) -DDEBUG -o  ${EXE} ${OBJETS} ${LDFLAGS}
+ 
+ install:
+ 	mkdir -p $(DESTDIR)$(PREFIX)/share/jukebox3d-0.5.0
+--- jukebox3D/Makefile~	2008-03-23 16:59:44.000000000 +0200
++++ jukebox3D/Makefile	2008-03-23 17:00:07.047184265 +0200
+@@ -58,4 +58,4 @@
+ 	cp bin/jukebox3D $(DESTDIR)$(PREFIX)/bin
+ 	cp bin/jukebox3D-bin $(DESTDIR)$(PREFIX)/share/jukebox3d-0.5.0
+ 	cp bin/data/jukebox3D.desktop $(DESTDIR)$(PREFIX)/share/applications 
+-	cp bin/data/j3dico.png	/usr/share/icons/
++	cp bin/data/j3dico.png	$(DESTDIR)/usr/share/icons/
