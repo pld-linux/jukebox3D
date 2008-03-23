@@ -6,7 +6,7 @@ License:	GPL
 Group:		X11/Amusements
 Source0:	http://j3d.linuxonfire.org/download/old/0.5.0/%{name}_EN.tar.gz
 # Source0-md5:	1dbf791ae76b48f661b8a0ef826abd9e
-Patch0:		%{name}-optflags.patch
+Patch0:		%{name}-optflags1.patch
 URL:		http://j3d.linuxonfire.org/index.php?lang=1
 BuildRequires:	SDL_image-devel
 BuildRequires:	SDL_ttf-devel
